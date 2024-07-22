@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock head %}
+
+{% block content %}
+{% for article in articles %}
+    <article class="article">
+        <h2>{{ article.title }}</h2><br>
+        <b>{{ article.describe }}</b><br>
+        <b>{{ article.created_at }}</b><br>
+    </article>
+{% endfor %}
+{% endblock content %}

@@ -5,7 +5,7 @@ def index(request):
 
     context = {
         "articles":
-            list(models.Post.objects.all())
+            models.Post.objects.all()
         
     }
 
