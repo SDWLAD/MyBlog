@@ -10,3 +10,7 @@ def index(request):
     }
 
     return render(request, 'index.html', context=context)
+
+def article(request, id):
+    context = {"article":models.Post.objects.get(pk=id)}
+    return render(request, 'article.html', context=context)
