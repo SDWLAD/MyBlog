@@ -1,26 +1,22 @@
 from django.shortcuts import render, HttpResponse, redirect
+from django.urls import reverse_lazy
 from . import models
 from .forms import PostForm
+from django.views.generic import ListView, DetailView, CreateView
 
-def index(request):
-    context = {
-        "articles":
-            models.Post.objects.all()
-        
-    }
+class IndexView(ListView):
+    model = models.Post
+    template_name = 'index.html'
+    context_object_name = 'articles'
 
-    return render(request, 'index.html', context=context)
+    def get_queryset(self):
+        return models.Post.objects.order_by('-created_at')
 
-def article(request, id):
-    context = {"article":models.Post.objects.get(pk=id)}
-    return render(request, 'article.html', context=context)
+class ShowArticleView(DetailView):
+    model = models.Post
+    template_name = 'article.html'
+    context_object_name = 'article'
 
-def create_article(request):
-    if request.method == 'POST':
-        form = PostForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('index')
-    else:
-        form = PostForm()
-    return render(request, 'create_article.html', {'form': form})
+class CreateArticleView(CreateView):
+    form_class = PostForm
+    template_name = 'create_article.html'
