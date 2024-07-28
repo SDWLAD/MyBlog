@@ -5,6 +5,7 @@ from .forms import PostForm
 from django.views.generic import ListView, DetailView, CreateView
 
 class IndexView(ListView):
+    paginate_by = 3
     model = models.Post
     template_name = 'index.html'
     context_object_name = 'articles'
