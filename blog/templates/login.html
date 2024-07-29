@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/articles.css' %}">
+{% endblock head %}
+
+{% block content %}
+
+<form method="post">
+    {% csrf_token %}
+    <div>{{ form.non_field_errors }}</div>
+    {% for f in form %}
+        <p><label for="{{ f.id_for_label }}">{{f.label}}: </label> {{ f }}</p>
+        <div>{{ f.errors }}</div>
+    {% endfor %}
+    <button type="submit">Send</button>
+</form>
+
+{% endblock %}

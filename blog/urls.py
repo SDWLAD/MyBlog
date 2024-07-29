@@ -6,5 +6,7 @@ urlpatterns = [
     path('<int:pk>', views.ShowArticleView.as_view(), name='article'),
     path('create-article', views.CreateArticleView.as_view(), name='create-article'),
     path('register', views.RegisterView.as_view(), name='register'),
+    path('login', views.AuthenticationView.as_view(), name='login'),
+    path('logout', views.accounts_logout, name='logout'),
 
 ]
