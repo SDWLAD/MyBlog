@@ -5,5 +5,6 @@ urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
     path('<int:pk>', views.ShowArticleView.as_view(), name='article'),
     path('create-article', views.CreateArticleView.as_view(), name='create-article'),
+    path('register', views.RegisterView.as_view(), name='register'),
 
 ]

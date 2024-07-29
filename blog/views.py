@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.urls import reverse_lazy
 from . import models
-from .forms import PostForm
+from .forms import *
 from django.views.generic import ListView, DetailView, CreateView
 
 class IndexView(ListView):
@@ -21,3 +21,8 @@ class ShowArticleView(DetailView):
 class CreateArticleView(CreateView):
     form_class = PostForm
     template_name = 'create_article.html'
+
+class RegisterView(CreateView):
+    form_class = RegisterUserForm
+    template_name = 'register.html'
+    success_url = '/'
