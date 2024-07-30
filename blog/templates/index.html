@@ -6,26 +6,35 @@
 {% endblock head %}
 
 {% block content %}
-{% for article in articles %}
-    <div class="article">
-        <div>
-            <h2>{{ article.title }}</h2><br>
-            <b>{{ article.describe }}</b><br>
-            <b>{{ article.created_at }}</b><br>
+
+<section class="articles">
+    {% for article in articles %}
+        <div class="article">
+            <div>
+                <h2>{{ article.title }}</h2><br>
+                <b>{{ article.describe }}</b><br>
+                <b>{{ article.created_at }}</b><br>
+            </div>
+            <a href="{{article.id }}">Read More</a>
         </div>
-        <a href="{{article.id }}">Read More</a>
-    </div>
-{% endfor %}
+    {% endfor %}
+</section>
 
 <div class="pagination">
     {% if page_obj.has_previous %}
         <a href="?page=1">&laquo;</a>
         <a href="?page={{ page_obj.previous_page_number }}">&lt;</a>
+    {% else %}
+        <a>&laquo;</a>
+        <a>&lt;</a>
     {% endif %}
     <a>{{ page_obj.number }}</a>
     {% if page_obj.has_next %}
         <a href="?page={{ page_obj.next_page_number }}">&gt;</a>
         <a href="?page={{ page_obj.paginator.num_pages }}">&raquo;</a>
+    {% else %}
+        <a>&raquo;</a>
+        <a>&gt;</a>
     {% endif %}
 </div>
 

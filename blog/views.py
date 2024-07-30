@@ -10,7 +10,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import logout, login
 
 class IndexView(ListView):
-    paginate_by = 3
+    paginate_by = 9
     model = models.Post
     template_name = 'index.html'
     context_object_name = 'articles'
