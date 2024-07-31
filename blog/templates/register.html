@@ -2,18 +2,29 @@
 {% load static %}
 
 {% block head %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
 <link rel="stylesheet" href="{% static 'css/articles.css' %}">
 {% endblock head %}
 
 {% block content %}
 
+<div class="background">
+    <div class="shape"></div>
+    <div class="shape"></div>
+</div>
+
 <form method="post">
-    {% csrf_token %}
+    {% csrf_token %}  
+    <h3>Sign up</h3>
+
+    <div>{{ form.non_field_errors }}</div>
+
     {% for f in form %}
-        <p><label class="form-label" for="{{ f.id_for_label }}">{{f.label}}: </label> {{ f }}</p>
-        <div class="form-error">{{ f.errors }}</div>
+        <p><label for="{{ f.id_for_label }}">{{f.label}}: </label> {{ f }}</p>
+        <div>{{ f.errors }}</div>
     {% endfor %}
-    <button type="submit">Send</button>
+
+    <button type="submit">Register</button>
 </form>
 
 {% endblock %}
