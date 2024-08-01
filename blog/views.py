@@ -8,6 +8,7 @@ from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import logout, login
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 class IndexView(ListView):
     paginate_by = 9
@@ -23,9 +24,17 @@ class ShowArticleView(DetailView):
     template_name = 'article.html'
     context_object_name = 'article'
 
-class CreateArticleView(CreateView):
+class CreateArticleView(LoginRequiredMixin, CreateView):
     form_class = PostForm
     template_name = 'create_article.html'
+    
+    def form_valid(self, form):
+        if self.request.user.is_authenticated:
+            form.instance.author = self.request.user
+            return super().form_valid(form)
+        else:
+            print("AAA")
+            return self.form_invalid(form)
 
 class RegisterView(CreateView):
     form_class = RegisterUserForm
