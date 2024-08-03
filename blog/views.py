@@ -19,10 +19,26 @@ class IndexView(ListView):
     def get_queryset(self):
         return models.Post.objects.order_by('-created_at')
 
-class ShowArticleView(DetailView):
-    model = models.Post
+class ShowArticleView(CreateView):
+    form_class = CommentForm
     template_name = 'article.html'
-    context_object_name = 'article'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['article'] = models.Post.objects.get(id=self.kwargs['pk'])
+        context['comments'] = models.Comment.objects.filter(post=self.kwargs['pk']).order_by('-created_at')
+        context['form'] = CommentForm()
+
+        return context
+    
+    def form_valid(self, form):
+        try:
+            form.instance.post = models.Post.objects.get(id=self.kwargs['pk'])
+            form.instance.author = self.request.user
+            return super().form_valid(form)
+        except:
+            return self.form_invalid(form)
 
 class CreateArticleView(LoginRequiredMixin, CreateView):
     form_class = PostForm
@@ -33,8 +49,8 @@ class CreateArticleView(LoginRequiredMixin, CreateView):
             form.instance.author = self.request.user
             return super().form_valid(form)
         else:
-            print("AAA")
             return self.form_invalid(form)
+    
 
 class RegisterView(CreateView):
     form_class = RegisterUserForm

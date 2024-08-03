@@ -2,12 +2,37 @@
 {% load static %}
 
 
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/detail.css' %}">
+{% endblock head %}
+
 {% block content %}
-<div class="article">
-    <h1>{{ article.title }}</h1><br>
-    <h4>{{ article.describe }}</h4><br>
-    {{ article.content }}<br><br>
-    <p>{{ article.author.username }}</p>
-    {{ article.created_at }}<br>
+
+<h1>{{ article.title }}</h1><br>
+<h4>{{ article.describe }}</h4><br>
+{{ article.content }}<br><br>
+<p>{{ article.author.username }}</p>
+{{ article.created_at }}<br>
+
+{{ form.non_field_errors }}
+
+<div class="comments">
+    <h1>Додати коментар</h1>
+    <form method="post" class="comment">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Опублікувати</button>
+    </form>
+
+    {% for comment in comments %}
+        <div class="comment">
+            <div class="header">
+                <b>{{ comment.author.username }}</b>
+                <b>{{ comment.created_at }}</b>
+            </div>
+            {{comment.content}}
+        </div>
+    {% endfor %}
 </div>
+
 {% endblock content %}
