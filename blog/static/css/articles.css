@@ -4,10 +4,11 @@
 }
 
 .article{
-    background-color: rgb(13,110,253); 
-    color: #fff;
+    background-color: rgba(0, 0, 0, 0.13);
+    backdrop-filter: blur(10px);
+    color: #ebebeb;
     margin: 25px;
-    border-radius: 0.375rem;
+    border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.6) 0px 7px 29px 0px;
     border: 3px solid rgba(255, 255, 255, 0.107);
 
@@ -27,6 +28,8 @@
     display: inline-block;
     font-size: 16px;
     margin: 40px 0px 0px 0px;
+    border-radius: 7px;
+
 }
 
 .pagination {

@@ -17,3 +17,11 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('content',)
+        widgets = {
+            'content': forms.Textarea(attrs={
+                'class': 'field',
+                'placeholder': 'Введіть ваш коментар',
+                'rows': 1,
+                "oninput": "auto_grow(this)"
+            }),
+        }

@@ -4,6 +4,8 @@
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/detail.css' %}">
+<style>
+</style>
 {% endblock head %}
 
 {% block content %}
@@ -17,22 +19,30 @@
 {{ form.non_field_errors }}
 
 <div class="comments">
-    <h1>Додати коментар</h1>
-    <form method="post" class="comment">
+    <form method="post" class="comment_form">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Опублікувати</button>
+        {% for field in form %}
+            {{field}}
+        {% endfor %}
+        <button type="submit" class="comment_button">Опублікувати</button>
     </form>
 
     {% for comment in comments %}
         <div class="comment">
             <div class="header">
                 <b>{{ comment.author.username }}</b>
-                <b>{{ comment.created_at }}</b>
+                {{ comment.created_at }}
             </div>
             {{comment.content}}
         </div>
     {% endfor %}
 </div>
+
+<script>
+    function auto_grow(element) {
+        element.style.height = "5px";
+        element.style.height = (element.scrollHeight) + "px";
+      }
+</script>
 
 {% endblock content %}
