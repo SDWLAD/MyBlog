@@ -62,6 +62,10 @@ class RegisterView(CreateView):
         login(self.request, user)
         return redirect("/", args=(),kwargs={})
 
+class ProfileView(LoginRequiredMixin, DetailView):
+    model = models.User
+    template_name = 'profile.html'
+    context_object_name = 'account'
 
 class AuthenticationView(LoginView):
     form_class = AuthenticationForm
