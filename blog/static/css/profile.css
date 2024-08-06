@@ -1,0 +1,108 @@
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-pic {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-info h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+.profile-info a {
+    padding: 8px 16px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.profile-info button:hover {
+    background-color: #218838;
+}
+
+.profile-info p {
+    margin: 10px 0 0 0;
+    color: #586069;
+}
+
+main {
+    margin-top: 20px;
+}
+
+.articles {
+    margin-bottom: 20px;
+}
+
+.articles h2 {
+    margin: 0 0 10px 0;
+    font-size: 24px;
+}
+
+.article-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.article {
+    background-color: rgba(0, 0, 0, 0.13);
+    backdrop-filter: blur(10px);
+    color: #ebebeb;
+    box-shadow: rgba(0, 0, 0, 0.6) 0px 7px 29px 0px;
+    border: 3px solid rgba(255, 255, 255, 0.107);
+    padding: 10px;
+    border-radius: 5px;
+    width: calc(33.3333% - 20px);
+    text-decoration: none;
+}
+
+.article h3 {
+    margin: 0 0 5px 0;
+    font-size: 18px;
+}
+
+.article p {
+    margin: 0;
+    color: #ffffff;
+}
+
+.activity {
+    margin-bottom: 20px;
+}
+
+.activity h2 {
+    margin: 0 0 10px 0;
+    font-size: 24px;
+}
+
+.activity-graph {
+    background-color: rgba(0, 0, 0, 0.13);
+    backdrop-filter: blur(10px);
+    color: #ebebeb;
+    box-shadow: rgba(0, 0, 0, 0.6) 0px 7px 29px 0px;
+    border: 3px solid rgba(255, 255, 255, 0.107);
+
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.activity p {
+    color: #586069;
+}

@@ -2,11 +2,67 @@
 {% load static %}
 
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
 {% endblock head %}
 
 {% block content %}
-
-{{account}}
-
+<div class="header">
+    <img src="profile-pic.png" alt="Profile Picture" class="profile-pic">
+    <div class="profile-info">
+        <h1>{{ account.username }}</h1>
+        {% if account == user %}
+            <a>Edit profile</a>
+        {% endif %}
+        <p>1 follower · 1 following</p>
+    </div>
+</div>
+<main>
+    <section class="articles">
+        <h2>Popular articles</h2>
+        <div class="article-grid">
+            {% for article in articles %}
+            <a class="article" href="{% url 'article' article.id %}">
+                <h3>{{ article.title }}</h3>
+                <p>{{article.describe}}</p>
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+    <section class="activity">
+        <h2>{{ account.username }}'s activities</h2>
+        <canvas id="myChart" class="activity-graph"></canvas>
+    </section>
+</main>
+<script>
+    const xValues = {{ activity.x|safe }};
+    const yValues = {{ activity.y|safe }};
+    
+    new Chart("myChart", {
+      type: "line",
+      data: {
+        labels: xValues,
+        datasets: [{
+          fill: false,
+          lineTension: 0,
+          backgroundColor: "rgba(255,255,255,1.0)",
+          borderColor: "rgba(255,255,255,0.5)",
+          data: yValues
+        }]
+      },
+      options: {
+        legend: {display: false},
+        scales: {
+          yAxes: [{ticks: {min: 0, max:5, fontColor: "black"}}],
+          xAxes: [{
+            ticks: {
+              fontColor: "black"
+            }
+          }]
+        }
+      }
+    });
+    </script>
 {% endblock %}

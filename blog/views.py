@@ -1,3 +1,5 @@
+from datetime import timedelta
+from django.utils import timezone
 from django.forms import BaseModelForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, HttpResponse, redirect
@@ -66,6 +68,24 @@ class ProfileView(LoginRequiredMixin, DetailView):
     model = models.User
     template_name = 'profile.html'
     context_object_name = 'account'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        articles = models.Post.objects.filter(author=self.kwargs['pk']).order_by('-created_at')
+        context['articles'] = articles[:9]
+
+        now = timezone.now()
+        start_date = now - timedelta(days=15)
+        activity = {'x': [], 'y': []}
+        for i in range(16):
+            day = start_date + timedelta(days=i)
+            day_str = day.strftime('%Y-%m-%d')
+            activity['x'].append(day_str)
+            
+            count = articles.filter(created_at__date=day.date()).count()
+            activity['y'].append(count)
+            context['activity'] = activity
+        return context
 
 class AuthenticationView(LoginView):
     form_class = AuthenticationForm
