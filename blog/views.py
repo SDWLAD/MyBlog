@@ -97,3 +97,6 @@ class AuthenticationView(LoginView):
 def accounts_logout(request):
     logout(request)
     return redirect("/", args=(),kwargs={}) 
+
+def about(request):
+    return render(request, 'about.html')
