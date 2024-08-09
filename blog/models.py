@@ -18,3 +18,10 @@ class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.CharField(max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)
+
+class Profile(models.Model):
+   user = models.OneToOneField(User, on_delete=models.CASCADE)
+   image = models.ImageField(default='default.jpg',  
+                                     upload_to='profile_pics')
+   def __str__(self):
+      return f'{self.user.username} Profile'
