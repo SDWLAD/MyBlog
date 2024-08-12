@@ -1,9 +1,6 @@
 from datetime import timedelta
 from django.utils import timezone
-from django.forms import BaseModelForm
-from django.http import HttpResponseRedirect
-from django.shortcuts import render, HttpResponse, redirect
-from django.urls import reverse, reverse_lazy
+from django.shortcuts import render, redirect
 from . import models
 from .forms import *
 from django.views.generic import ListView, DetailView, CreateView
@@ -100,3 +97,6 @@ def accounts_logout(request):
 
 def about(request):
     return render(request, 'about.html')
+
+def edit_profile(request):
+    return render(request, 'edit_profile.html')

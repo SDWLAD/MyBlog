@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post, Comment
+from .models import Post, Comment, Profile
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
@@ -25,3 +25,8 @@ class CommentForm(forms.ModelForm):
                 "oninput": "auto_grow(this)"
             }),
         }
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['image']
