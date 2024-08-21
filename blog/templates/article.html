@@ -15,8 +15,7 @@
 {{ article.content }}<br><br>
 <p>{{ article.author.username }}</p>
 {{ article.created_at }}<br>
-
-{{ form.non_field_errors }}
+<i style="color:#ddd">{{ article.views_count }} views</i><br>
 
 <div class="comments">
     <form method="post" class="comment_form">

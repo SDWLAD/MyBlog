@@ -14,9 +14,13 @@ body {
   margin-right:auto;
 }
 
+.ripple-background {
+  background-color: aliceblue;
+}
+
 .circle{
   z-index: -9999;
-  position: absolute;
+  position: fixed;
   border-radius: 50%;
   background: white;
   animation: ripple 15s infinite;
