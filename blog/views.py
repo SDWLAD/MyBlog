@@ -28,6 +28,9 @@ class ShowArticleView(CreateView):
         context['article'] = models.Post.objects.get(id=self.kwargs['pk'])
         context['comments'] = models.Comment.objects.filter(post=self.kwargs['pk']).order_by('-created_at')
         context['form'] = CommentForm()
+        context['article'].views_count += 1
+        context['article'].save()
+
 
         return context
     
