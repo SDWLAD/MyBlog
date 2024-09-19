@@ -6,6 +6,7 @@
 body { 
   margin: 0;
   background-color: #3399ff;
+  font: 1.2rem "Fira Sans", sans-serif;
 }
 
 main{
